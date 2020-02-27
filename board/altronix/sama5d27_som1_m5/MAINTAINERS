@@ -1,0 +1,8 @@
+SAMA5D27 SOM1 M5 BOARD
+M:	Thomas Chiantia <thomas@altronix.com>
+S:	Maintained
+F:	board/atmel/sama5d27_som1_m5/
+F:	include/configs/sama5d27_som1_m5.h
+F:	configs/sama5d27_som1_m5_mmc_defconfig
+F:	configs/sama5d27_som1_m5_mmc1_defconfig
+F:	configs/sama5d27_som1_m5_qspiflash_defconfig

@@ -179,6 +179,20 @@ config TARGET_SAMA5D2_XPLAINED
 	select SAMA5D2
 	select SUPPORT_SPL
 
+config TARGET_SAMA5D27_SOM1_M5
+	bool "SAMA5D27 SOM1 M5 board"
+	select BOARD_EARLY_INIT_F
+	select BOARD_LATE_INIT
+	select CPU_V7A
+	select SUPPORT_SPL
+	select ATMEL_SFR
+	help
+	  The SAMA5D27 SOM1 embeds SAMA5D2 SiP(System in Package),
+	  a 64Mbit QSPI flash, KSZ8081 Phy and a Mac-address EEPROM
+	  24AA02E48. The SAMA5D2 SiP integrates the ARM Cortex-A5
+	  processor-based SAMA5D2 MPU with up to 1 Gbit DDR2-SDRAM
+	  in a single package.
+
 config TARGET_SAMA5D27_SOM1_EK
 	bool "SAMA5D27 SOM1 EK board"
 	select BOARD_EARLY_INIT_F
@@ -314,6 +328,7 @@ config ATMEL_SFR
 config SYS_SOC
 	default "at91"
 
+source "board/altronix/sama5d27_som1_m5/Kconfig"
 source "board/atmel/at91rm9200ek/Kconfig"
 source "board/atmel/at91sam9260ek/Kconfig"
 source "board/atmel/at91sam9261ek/Kconfig"
