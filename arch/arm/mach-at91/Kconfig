@@ -328,7 +328,6 @@ config ATMEL_SFR
 config SYS_SOC
 	default "at91"
 
-source "board/altronix/sama5d27_som1_m5/Kconfig"
 source "board/atmel/at91rm9200ek/Kconfig"
 source "board/atmel/at91sam9260ek/Kconfig"
 source "board/atmel/at91sam9261ek/Kconfig"
@@ -340,6 +339,7 @@ source "board/atmel/at91sam9x5ek/Kconfig"
 source "board/atmel/sam9x60ek/Kconfig"
 source "board/atmel/sama5d2_ptc_ek/Kconfig"
 source "board/atmel/sama5d2_xplained/Kconfig"
+source "board/atmel/sama5d27_som1_m5/Kconfig"
 source "board/atmel/sama5d27_som1_ek/Kconfig"
 source "board/atmel/sama5d27_wlsom1_ek/Kconfig"
 source "board/atmel/sama5d2_icp/Kconfig"
