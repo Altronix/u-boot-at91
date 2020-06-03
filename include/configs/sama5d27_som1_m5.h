@@ -28,8 +28,15 @@
 #define CONFIG_SYS_LOAD_ADDR		0x22000000 /* load address */
 
 /* NAND flash */
-#undef CONFIG_CMD_NAND
-
+#ifdef CONFIG_CMD_NAND
+#define CONFIG_SYS_MAX_NAND_DEVICE	1
+#define CONFIG_SYS_NAND_BASE		ATMEL_BASE_CS3
+/* our ALE is AD21 */
+#define CONFIG_SYS_NAND_MASK_ALE	BIT(21)
+/* our CLE is AD22 */
+#define CONFIG_SYS_NAND_MASK_CLE	BIT(22)
+#define CONFIG_SYS_NAND_ONFI_DETECTION
+#endif
 /* SPI flash */
 
 #undef CONFIG_BOOTCOMMAND
