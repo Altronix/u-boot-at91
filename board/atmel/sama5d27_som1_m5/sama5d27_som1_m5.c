@@ -44,9 +44,17 @@ static void board_uart1_hw_init(void)
 	at91_periph_clk_enable(ATMEL_ID_UART1);
 }
 
+static void board_uart0_hw_init(void)
+{
+	atmel_pio4_set_c_periph(AT91_PIO_PORTB, 26, ATMEL_PIO_PUEN_MASK);	/* URXD0 */
+	atmel_pio4_set_c_periph(AT91_PIO_PORTB, 27, 0);	/* UTXD0 */
+
+	at91_periph_clk_enable(ATMEL_ID_UART0);
+}
+
 void board_debug_uart_init(void)
 {
-	board_uart1_hw_init();
+	board_uart0_hw_init();
 }
 #endif
 
