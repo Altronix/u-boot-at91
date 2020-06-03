@@ -51,7 +51,7 @@
 
 	chosen {
 		u-boot,dm-pre-reloc;
-		stdout-path = &uart1;
+		stdout-path = &uart0;
 	};
 
 	onewire_tm: onewire {
@@ -119,6 +119,13 @@
 						u-boot,dm-pre-reloc;
 					};
 				};
+			};
+
+			uart0: serial@f801c000 {
+				pinctrl-names = "default";
+				pinctrl-0 = <&pinctrl_uart0_default>;
+				status = "okay";
+				u-boot,dm-pre-reloc;
 			};
 
 			uart1: serial@f8020000 {
@@ -202,6 +209,13 @@
 					pinctrl_sdmmc1_ck_cd_default: sdmmc1_ck_cd_default {
 						pinmux = <PIN_PA22__SDMMC1_CK>,
 							 <PIN_PA30__SDMMC1_CD>;
+						bias-disable;
+						u-boot,dm-pre-reloc;
+					};
+								      
+					pinctrl_uart0_default: uart0_default {
+						pinmux = <PIN_PB26__URXD0>,
+							 <PIN_PB27__UTXD0>;
 						bias-disable;
 						u-boot,dm-pre-reloc;
 					};
