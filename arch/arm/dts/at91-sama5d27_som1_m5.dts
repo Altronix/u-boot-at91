@@ -51,7 +51,7 @@
 
 	chosen {
 		u-boot,dm-pre-reloc;
-		stdout-path = &uart0;
+		stdout-path = &uart1;
 	};
 
 	onewire_tm: onewire {
