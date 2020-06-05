@@ -6,6 +6,10 @@
 
 #include <common.h>
 #include <debug_uart.h>
+#include <dm.h>
+#include <i2c.h>
+#include <nand.h>
+#include <version.h>
 #include <asm/io.h>
 #include <asm/arch/at91_common.h>
 #include <asm/arch/atmel_pio4.h>
@@ -14,6 +18,7 @@
 #include <asm/arch/clk.h>
 #include <asm/arch/gpio.h>
 #include <asm/arch/sama5d2.h>
+#include <asm/arch/sama5d2_smc.h>
 
 extern void at91_pda_detect(void);
 
