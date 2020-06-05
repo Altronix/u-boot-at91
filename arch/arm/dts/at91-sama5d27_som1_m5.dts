@@ -91,7 +91,7 @@
 			bus-width = <4>;
 			pinctrl-names = "default";
 			pinctrl-0 = <&pinctrl_sdmmc1_cmd_dat_default &pinctrl_sdmmc1_ck_cd_default>;
-			status = "okay"; /* conflict with qspi0 */
+			status = "disabled"; /* conflict with qspi0 */
 			u-boot,dm-pre-reloc;
 		};
 
