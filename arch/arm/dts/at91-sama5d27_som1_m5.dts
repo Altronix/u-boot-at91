@@ -1,5 +1,5 @@
 /*
- * at91-sama5d27_som1_m5.dts - Device Tree file for SAMA5D27 SOM1 EK board
+ * at91-sama5d27_som1_m5.dts - Device Tree file for SAMA5D27 SOM1 M5 board
  *
  *  Copyright (C) 2017 Microchip Corporation
  *                     Wenyou Yang <wenyou.yang@microchip.com>
@@ -46,7 +46,7 @@
 #include "sama5d27_som1.dtsi"
 
 / {
-	model = "Atmel SAMA5D27 SOM1 EK";
+	model = "Atmel SAMA5D27 SOM1 M5";
 	compatible = "atmel,sama5d27-som1-m5", "atmel,sama5d2", "atmel,sama5";
 
 	chosen {
