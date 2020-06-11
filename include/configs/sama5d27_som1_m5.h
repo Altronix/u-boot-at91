@@ -43,6 +43,7 @@
 #undef CONFIG_BOOTCOMMAND
 #ifdef CONFIG_SD_BOOT
 /* u-boot env in sd/mmc card */
+#define CONFIG_ENV_OFFSET       0xb0000
 #define CONFIG_ENV_SIZE		0x4000
 /* bootstrap + u-boot + env in sd card */
 #define CONFIG_BOOTCOMMAND	"fatload mmc " CONFIG_ENV_FAT_DEVICE_AND_PART " 0x21000000 at91-sama5d27_som1_m5.dtb; " \

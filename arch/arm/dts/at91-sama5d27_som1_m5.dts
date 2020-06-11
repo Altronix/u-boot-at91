@@ -95,6 +95,67 @@
 			u-boot,dm-pre-reloc;
 		};
 
+		ebi: ebi@10000000 {
+			pinctrl-names = "default";
+			pinctrl-0 = <&pinctrl_nand_default>;
+			status = "okay"; /* conflicts with sdmmc1 and qspi0 */
+			/*status = "disabled"; /* conflicts with sdmmc1 and qspi0 */
+
+			nand_controller: nand-controller {
+				status = "okay";
+
+				nand@3 {
+					reg = <0x3 0x0 0x2>;
+					atmel,rb = <0>;
+					nand-bus-width = <8>;
+					nand-ecc-mode = "hw";
+					nand-on-flash-bbt;
+					label = "atmel_nand";
+
+					partitions {
+						compatible = "fixed-partitions";
+						#address-cells = <1>;
+						#size-cells = <1>;
+
+						at91bootstrap@0 {
+							label = "bootstrap";
+							reg = <0x0 0x40000>;
+						};
+
+						bootloader@40000 {
+							label = "bootloader";
+							reg = <0x40000 0xc0000>;
+						};
+
+						bootloaderenvred@0x100000 {
+							label = "bootloader env redundant";
+							reg = <0x100000 0x40000>;
+						};
+
+						bootloaderenv@0x140000 {
+							label = "bootloader env";
+							reg = <0x140000 0x40000>;
+						};
+
+						dtb@180000 {
+							label = "device tree";
+							reg = <0x180000 0x80000>;
+						};
+
+						kernel@200000 {
+							label = "kernel";
+							reg = <0x200000 0x600000>;
+						};
+
+						rootfs@800000 {
+							label = "rootfs";
+							reg = <0x800000 0x1f800000>;
+						};
+					};
+				};
+			};
+		};
+
 		apb {
 			hlcdc: hlcdc@f0000000 {
 				atmel,vl-bpix = <4>;
@@ -213,6 +274,31 @@
 						u-boot,dm-pre-reloc;
 					};
 								      
+					pinctrl_nand_default: nand_default {
+						re_we_data {
+							pinmux = <PIN_PA0__D0>,
+								 <PIN_PA1__D1>,
+								 <PIN_PA2__D2>,
+								 <PIN_PA3__D3>,
+								 <PIN_PA4__D4>,
+								 <PIN_PA5__D5>,
+								 <PIN_PA6__D6>,
+								 <PIN_PA7__D7>,
+								 <PIN_PA8__NWE_NANDWE>,
+								 <PIN_PA12__NRD_NANDOE>;
+							bias-pull-up;
+							/*atmel,drive-strength = <ATMEL_PIO_DRVSTR_ME>;  */
+						};
+
+						ale_cle_rdy_cs {
+							pinmux = <PIN_PA10__A21_NANDALE>,
+								 <PIN_PA11__A22_NANDCLE>,
+								 <PIN_PD8__NANDRDY>,
+								 <PIN_PA9__NCS3>;
+							bias-pull-up;
+						};
+					};
+
 					pinctrl_uart0_default: uart0_default {
 						pinmux = <PIN_PB26__URXD0>,
 							 <PIN_PB27__UTXD0>;
