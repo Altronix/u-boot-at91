@@ -50,11 +50,14 @@
 				"bootz 0x22000000 - 0x21000000"
 #endif
 
+/*
+// wtf
 #ifdef CONFIG_QSPI_BOOT
 #undef CONFIG_BOOTARGS
 #define CONFIG_BOOTARGS \
 	"console=ttyS0,115200 earlyprintk root=/dev/mmcblk0p2 rw rootwait"
 #endif
+*/
 
 /* SPL */
 #define CONFIG_SPL_TEXT_BASE		0x200000
