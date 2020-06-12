@@ -51,6 +51,21 @@
 				"bootz 0x22000000 - 0x21000000"
 #endif
 
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"qspi_probe=sf probe\0" \
+	"qspi_load_dts=sf read 0x21000000 0xc0000 0xe0000\0" \
+	"qspi_load_img=sf read 0x22000000 0xe0000 0x400000\0" \
+	"nand_load_dts=sf read 0x21000000 0x180000 0x80000\0" \
+	"nand_load_img=sf read 0x22000000 0x200000 0x600000\0" \
+	"boot_img=bootz 0x22000000 - 0x21000000\0" \
+	"bootdelay=1\0"
+
+#define CONFIG_BOOTCOMMAND \
+       	"run qspi_probe;" \
+	"run qspi_load_dts;" \
+        "run qspi_load_img;" \
+        "run boot_img;"
+
 /*
 // wtf
 #ifdef CONFIG_QSPI_BOOT
