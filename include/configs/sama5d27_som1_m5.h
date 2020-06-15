@@ -40,9 +40,10 @@
 #endif
 /* SPI flash */
 
+#undef CONFIG_BOOTCOMMAND
 #ifdef CONFIG_DOUBLE_COPY
-/* Double copy Boot Support */
 /*
+ * Double copy boot support
  * Note - these settings are eventually over-written by swupdate.
  */
 #define CONFIG_EXTRA_ENV_SETTINGS \
@@ -55,7 +56,9 @@
         "run nand_load_img;" \
         "run boot_img;"
 #elif CONFIG_NAND_BOOT
-/* Nand BOOT */
+/*
+ * Nand BOOT
+ */
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"nand_load_dts=nand read 0x21000000 0x180000 0x80000\0" \
 	"nand_load_img=nand read 0x22000000 0x200000 0x600000\0" \
@@ -66,7 +69,9 @@
         "run nand_load_img;" \
         "run boot_img;"
 #elif CONFIG_QSPI_BOOT
-/* QSPI BOOT */
+/*
+ * QSPI BOOT
+ */
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"qspi_probe=sf probe\0" \
 	"qspi_load_dts=sf read 0x21000000 0xc0000 0xe0000\0" \
@@ -79,6 +84,9 @@
         "run qspi_load_img;" \
         "run boot_img;"
 #else
+/*
+ *
+ */
 #undef CONFIG_BOOTCOMMAND
 #ifdef CONFIG_SD_BOOT
 /* u-boot env in sd/mmc card */
