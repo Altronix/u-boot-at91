@@ -12,4 +12,9 @@ config SYS_SOC
 config SYS_CONFIG_NAME
 	default "sama5d27_som1_m5"
 
+config DOUBLE_COPY
+	bool "Support for \"Double Copy\" software update"
+	default n
+	select NAND_BOOT
+
 endif

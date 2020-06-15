@@ -40,6 +40,45 @@
 #endif
 /* SPI flash */
 
+#ifdef CONFIG_DOUBLE_COPY
+/* Double copy Boot Support */
+/*
+ * Note - these settings are eventually over-written by swupdate.
+ */
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"nand_load_dts=nand read 0x21000000 0x0 0x80000\0" \
+	"nand_load_img=nand read 0x22000000 0x20000 0x600000\0" \
+	"boot_img=bootz 0x22000000 - 0x21000000\0" \
+	"bootdelay=1\0"
+#define CONFIG_BOOTCOMMAND \
+	"run nand_load_dts;" \
+        "run nand_load_img;" \
+        "run boot_img;"
+#elif CONFIG_NAND_BOOT
+/* Nand BOOT */
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"nand_load_dts=nand read 0x21000000 0x180000 0x80000\0" \
+	"nand_load_img=nand read 0x22000000 0x200000 0x600000\0" \
+	"boot_img=bootz 0x22000000 - 0x21000000\0" \
+	"bootdelay=1\0"
+#define CONFIG_BOOTCOMMAND \
+	"run nand_load_dts;" \
+        "run nand_load_img;" \
+        "run boot_img;"
+#elif CONFIG_QSPI_BOOT
+/* QSPI BOOT */
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"qspi_probe=sf probe\0" \
+	"qspi_load_dts=sf read 0x21000000 0xc0000 0xe0000\0" \
+	"qspi_load_img=sf read 0x22000000 0xe0000 0x400000\0" \
+	"boot_img=bootz 0x22000000 - 0x21000000\0" \
+	"bootdelay=1\0"
+#define CONFIG_BOOTCOMMAND \
+       	"run qspi_probe;" \
+	"run qspi_load_dts;" \
+        "run qspi_load_img;" \
+        "run boot_img;"
+#else
 #undef CONFIG_BOOTCOMMAND
 #ifdef CONFIG_SD_BOOT
 /* u-boot env in sd/mmc card */
@@ -50,21 +89,7 @@
 				"fatload mmc " CONFIG_ENV_FAT_DEVICE_AND_PART " 0x22000000 zImage; " \
 				"bootz 0x22000000 - 0x21000000"
 #endif
-
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	"qspi_probe=sf probe\0" \
-	"qspi_load_dts=sf read 0x21000000 0xc0000 0xe0000\0" \
-	"qspi_load_img=sf read 0x22000000 0xe0000 0x400000\0" \
-	"nand_load_dts=sf read 0x21000000 0x180000 0x80000\0" \
-	"nand_load_img=sf read 0x22000000 0x200000 0x600000\0" \
-	"boot_img=bootz 0x22000000 - 0x21000000\0" \
-	"bootdelay=1\0"
-
-#define CONFIG_BOOTCOMMAND \
-       	"run qspi_probe;" \
-	"run qspi_load_dts;" \
-        "run qspi_load_img;" \
-        "run boot_img;"
+#endif
 
 /*
 // wtf
