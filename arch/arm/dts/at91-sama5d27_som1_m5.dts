@@ -47,7 +47,7 @@
 
 / {
 	model = "Atmel SAMA5D27 SOM1 M5";
-	compatible = "atmel,sama5d27-som1-m5", "atmel,sama5d2", "atmel,sama5";
+	compatible = "atmel,sama5d27-som1-m5", "atmel,sama5d27-som1-ek", "atmel,sama5d2", "atmel,sama5";
 
 	chosen {
 		u-boot,dm-pre-reloc;
