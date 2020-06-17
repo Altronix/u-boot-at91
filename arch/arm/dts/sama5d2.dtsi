@@ -615,7 +615,7 @@
 				#address-cells = <1>;
 				#size-cells = <0>;
 				clocks = <&qspi1_clk>;
-				status = "disabled";
+				status = "okay";
 			};
 
 			spi0: spi@f8000000 {
