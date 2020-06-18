@@ -50,7 +50,7 @@
  * TODO evaluate why rootfs can only boot when partition is named rootfs
  */
 #define CONFIG_ENV_SIZE		0x4000
-#define CONFIG_ENV_SECT_SIZE CONFIG_ENV_SIZE /* ? */
+#define CONFIG_ENV_SECT_SIZE    0x1000       /* ? */
 #define CONFIG_SYS_REDUNDAND_ENVIRONMENT     /* ? */
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"nand_load_dts=nand read 0x21000000 0x0 0x80000\0" \
