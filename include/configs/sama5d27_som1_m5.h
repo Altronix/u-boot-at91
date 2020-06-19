@@ -40,82 +40,10 @@
 #endif
 /* SPI flash */
 
-#undef CONFIG_BOOTCOMMAND
-#undef CONFIG_BOOTARGS
-#undef CONFIG_ENV_SIZE
-#ifdef CONFIG_DOUBLE_COPY
-/*
- * Double copy boot support
- * Note - these settings are eventually over-written by swupdate.
- * TODO evaluate why rootfs can only boot when partition is named rootfs
- */
-#define CONFIG_ENV_SIZE		0x4000
+#if CONFIG_QSPI_BOOT
 #define CONFIG_ENV_SECT_SIZE    0x1000       /* ? */
 #define CONFIG_SYS_REDUNDAND_ENVIRONMENT     /* ? */
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	"nand_load_dts=nand read 0x21000000 0x0 0x80000\0" \
-	"nand_load_img=nand read 0x22000000 0x80000 0x600000\0" \
-	"boot_img=bootz 0x22000000 - 0x21000000\0" \
-	"bootdelay=1\0"
-#define CONFIG_BOOTCOMMAND \
-	"run nand_load_dts;" \
-        "run nand_load_img;" \
-        "run boot_img;"
-#define CONFIG_BOOTARGS \
-	"console=ttyS0,115200 " \
-	"earlyprintk " \
-	"mtdparts=atmel_nand:512k(dtb_a),6M(kernel_a)ro,257425408(rootfs_a),512k(dtb_b),6M(kernel_b)ro,257425408(rootfs_b),-(data) " \
-	"rootfstype=ubifs " \
-	"ubi.mtd=rootfs_a " \
-	"root=ubi0:rootfs"
-#elif CONFIG_NAND_BOOT
-/*
- * Nand BOOT
- */
-#define CONFIG_ENV_SIZE		0x4000
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	"nand_load_dts=nand read 0x21000000 0x180000 0x80000\0" \
-	"nand_load_img=nand read 0x22000000 0x200000 0x600000\0" \
-	"boot_img=bootz 0x22000000 - 0x21000000\0" \
-	"bootdelay=1\0"
-#define CONFIG_BOOTCOMMAND \
-	"run nand_load_dts;" \
-        "run nand_load_img;" \
-        "run boot_img;"
-#define CONFIG_BOOTARGS \
-	"console=ttyS0,115200 " \
-	"earlyprintk " \
-	"mtdparts=atmel_nand:256k(bootstrap)ro,768k(uboot)ro,256K(env_redundant),256k(env),512k(dtb),6M(kernel)ro,-(rootfs) " \
-	"rootfstype=ubifs " \
-	"ubi.mtd=rootfs " \
-	"root=ubi0:rootfs"
-#elif CONFIG_QSPI_BOOT
-/*
- * QSPI BOOT
- */
-#define CONFIG_ENV_SIZE		0x4000
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	"qspi_probe=sf probe\0" \
-	"qspi_load_dts=sf read 0x21000000 0xc0000 0xe0000\0" \
-	"qspi_load_img=sf read 0x22000000 0xe0000 0x400000\0" \
-	"boot_img=bootz 0x22000000 - 0x21000000\0" \
-	"bootdelay=1\0"
-#define CONFIG_BOOTCOMMAND \
-       	"run qspi_probe;" \
-	"run qspi_load_dts;" \
-        "run qspi_load_img;" \
-        "run boot_img;"
-#define CONFIG_BOOTARGS \
-	"console=ttyS0,115200 " \
-	"earlyprintk " \
-	"mtdparts=atmel_nand:256k(bootstrap)ro,768k(uboot)ro,256K(env_redundant),256k(env),512k(dtb),6M(kernel)ro,-(rootfs) " \
-	"rootfstype=ubifs " \
-	"ubi.mtd=rootfs " \
-	"root=ubi0:rootfs"
 #else
-/*
- *
- */
 #undef CONFIG_BOOTCOMMAND
 #ifdef CONFIG_SD_BOOT
 /* u-boot env in sd/mmc card */
@@ -127,15 +55,6 @@
 				"bootz 0x22000000 - 0x21000000"
 #endif /* else */
 #endif
-
-/*
-// wtf
-#ifdef CONFIG_QSPI_BOOT
-#undef CONFIG_BOOTARGS
-#define CONFIG_BOOTARGS \
-	"console=ttyS0,115200 earlyprintk root=/dev/mmcblk0p2 rw rootwait"
-#endif
-*/
 
 /* SPL */
 #define CONFIG_SPL_TEXT_BASE		0x200000
