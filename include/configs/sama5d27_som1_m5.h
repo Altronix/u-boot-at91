@@ -41,8 +41,6 @@
 /* SPI flash */
 
 #if CONFIG_QSPI_BOOT
-#define CONFIG_ENV_SECT_SIZE    0x1000       /* ? */
-#define CONFIG_SYS_REDUNDAND_ENVIRONMENT     /* ? */
 #else
 #undef CONFIG_BOOTCOMMAND
 #ifdef CONFIG_SD_BOOT
