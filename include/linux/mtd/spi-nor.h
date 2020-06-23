@@ -62,6 +62,7 @@
 #define SPINOR_OP_CLFSR		0x50	/* Clear flag status register */
 #define SPINOR_OP_RDEAR		0xc8	/* Read Extended Address Register */
 #define SPINOR_OP_WREAR		0xc5	/* Write Extended Address Register */
+#define SPINOR_OP_GBULK		0x98	/* Global Block Unlock Protection */
 
 /* 4-byte address opcodes - used on Spansion and some Macronix flashes. */
 #define SPINOR_OP_READ_4B	0x13	/* Read data bytes (low frequency) */
@@ -90,6 +91,10 @@
 #define SPINOR_OP_BP		0x02	/* Byte program */
 #define SPINOR_OP_WRDI		0x04	/* Write disable */
 #define SPINOR_OP_AAI_WP	0xad	/* Auto address increment word program */
+
+/* Used for SST26* flashes only. */
+#define SPINOR_OP_READ_BPR	0x72	/* Read block protection register */
+#define SPINOR_OP_WRITE_BPR	0x42	/* Write block protection register */
 
 /* Used for S3AN flashes only */
 #define SPINOR_OP_XSE		0x50	/* Sector erase */
@@ -242,7 +247,13 @@ enum spi_nor_option_flags {
  */
 struct flash_info;
 
-/* TODO: Remove, once all users of spi_flash interface are moved to MTD */
+/*
+ * TODO: Remove, once all users of spi_flash interface are moved to MTD
+ *
+ * struct spi_flash {
+ *	Defined below (keep this text to enable searching for spi_flash decl)
+ * }
+ */
 #define spi_flash spi_nor
 
 /**
